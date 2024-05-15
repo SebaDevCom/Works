@@ -1,4 +1,4 @@
-package Works.Hotel;
+package Hotel;
 
 public class HabitacionIndividual extends Habitacion {
 

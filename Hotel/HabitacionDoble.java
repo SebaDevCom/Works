@@ -1,4 +1,4 @@
-package Works.Hotel;
+package Hotel;
 
 public class HabitacionDoble extends Habitacion {
 

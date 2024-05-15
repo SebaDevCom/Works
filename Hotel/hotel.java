@@ -1,4 +1,4 @@
-package Works.Hotel;
+package Hotel;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

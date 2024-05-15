@@ -1,4 +1,4 @@
-package Works.Hotel;
+package Hotel;
 
 class Factura {
 

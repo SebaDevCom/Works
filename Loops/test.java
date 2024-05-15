@@ -1,4 +1,4 @@
-package Works.Loops;
+package Loops;
 
 public class test {
 

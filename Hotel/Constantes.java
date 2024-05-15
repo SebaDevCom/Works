@@ -1,4 +1,4 @@
-package Works.Hotel;
+package Hotel;
 
 public interface Constantes {
     String NOM = "Hotel Tilines";
