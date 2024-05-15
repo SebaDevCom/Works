@@ -22,7 +22,7 @@ public class hotel {
                     System.out.println("Hotel los tilinos");
                     System.out.println("Menú:");
                     System.out.println("1) Reservar Habitación");
-                    System.out.println("2) Mostrar Información de Habitaciones");
+                    System.out.println("2) Mostrar información de habitaciones");
                     System.out.println("3) Facturas");
                     System.out.println("4) Salir");
                     System.out.print("Ingrese su opción: ");
@@ -78,7 +78,10 @@ public class hotel {
                                                 direccionValida = true;
                                             }
                                         } while (!direccionValida);
-                                        System.out.println("Registro exitoso");
+
+                                        System.out.println("¡Registro exitoso, hasta luego!");
+
+
                                         Cliente cliente = new Cliente(nombreCliente, rfcCliente, direccionCliente);
                                         facturas[numFacturas] = new Factura(cliente, habitacionSeleccionada);
                                         numFacturas++;
