@@ -1,10 +1,10 @@
-package Hotel;
+package HOTEL;
 
 public class HabitacionSuite extends Habitacion {
     private String bar;
 
     public HabitacionSuite(String tipo, int numHabitacion, double precio, String planta, int disponibilidad, String bar) {
-        super(tipo, numHabitacion, precio, planta, disponibilidad);
+        super(tipo, precio, planta, disponibilidad);
         this.bar = bar;
     }
 
@@ -24,5 +24,9 @@ public class HabitacionSuite extends Habitacion {
     @Override
     public double calcularCostoTotal() {
         return getPrecio();
+    }
+
+    public String toString(){
+        return super.toString() +" Incluye acceso a " + this.getBar() + " mini bar.";
     }
 }

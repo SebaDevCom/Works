@@ -1,16 +1,17 @@
-package Hotel;
+package HOTEL;
 
-public abstract class Habitacion {
+abstract class Habitacion {
 
+    private static int contadorHabitaciones = 1;
     private String tipo;
     private int numHabitacion;
     private double precio;
     private String planta;
     private int disponibilidad;
 
-    public Habitacion(String tipo, int numHabitacion, double precio, String planta, int disponibilidad) {
+    public Habitacion(String tipo, double precio, String planta, int disponibilidad) {
         this.tipo = tipo;
-        this.numHabitacion = numHabitacion;
+        this.numHabitacion = contadorHabitaciones++; 
         this.precio = precio;
         this.planta = planta;
         this.disponibilidad = disponibilidad;
@@ -20,7 +21,7 @@ public abstract class Habitacion {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(String tipo){
         this.tipo = tipo;
     }
 
@@ -28,7 +29,7 @@ public abstract class Habitacion {
         return numHabitacion;
     }
 
-    public void setNumHabitacion(int numHabitacion) {
+    public void setNumHabitacion(int numHabitacion){
         this.numHabitacion = numHabitacion;
     }
 
@@ -36,7 +37,7 @@ public abstract class Habitacion {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(double precio){
         this.precio = precio;
     }
 
@@ -44,7 +45,7 @@ public abstract class Habitacion {
         return planta;
     }
 
-    public void setPlanta(String planta) {
+    public void setPlanta(String planta){
         this.planta = planta;
     }
 
@@ -59,4 +60,9 @@ public abstract class Habitacion {
     public abstract void reservarHabitacion();
 
     public abstract double calcularCostoTotal();
+
+    @Override
+    public String toString() {
+        return "Tipo: " + tipo + ", Planta: " + planta + ", Precio: $" + precio;
+    }
 }

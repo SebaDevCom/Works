@@ -1,4 +1,4 @@
-package Hotel;
+package HOTEL;
 
 class Factura {
 
