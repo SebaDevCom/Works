@@ -25,7 +25,7 @@ public class CrearArchivosTexto{
         RegistroDeProductos registro = new RegistroDeProductos();
         Scanner teclado = new Scanner(System.in);
         System.out.printf("%s\n%s\n%s\n%s\n\n",
-        "Para terminar la entrada, escriba el indicador de fin de archivo ",
+        "Para terminar de ingresar productos pude presionar los siguientes comandos ",
                 "cuando se le pida que escriba los datos de entrada.",
                 "En UNIX/Linux/Mac OS X escriba <ctrl> d y oprima Intro",
                 "En Windows escriba <ctrl> z y oprima Intro");
