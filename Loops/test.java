@@ -13,7 +13,7 @@ public class test {
         }
 
         System.out.println();
-        System.out.println("Bucle While: 2");
+        System.out.println("Bucle While: ");
         System.out.println();
 
         int contador = 0;
@@ -23,7 +23,7 @@ public class test {
         }
 
         System.out.println();
-        System.out.println("Bucle do-while: 3");
+        System.out.println("Bucle do-while: ");
         System.out.println();
 
         int contadoor = 0;

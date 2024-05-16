@@ -1,0 +1,32 @@
+Resumen De Jerarquía De Datos:
+Las computadoras emplean archivos para almacenar grandes volúmenes de datos a largo plazo, incluso después de que los 
+programas que generan esos datos finalizan. Estos datos, conocidos como datos persistentes, son cruciales para aplicaciones 
+comerciales que manejan cantidades masivas de información. Ese capítulo explora cómo Java maneja la creación, 
+actualización y procesamiento de archivos, esenciales para aplicaciones que requieren persistencia de datos. Se presentan 
+herramientas poderosas para el procesamiento de archivos y flujos de entrada/salida en Java, destacando su importancia para 
+aplicaciones de red. Se explican los dos tipos principales de archivos texto y binarios y se discuten las diferencias 
+entre ellos. Además, se introduce la clase File para obtener información sobre archivos y directorios. Se abordan varias 
+técnicas para escribir y leer datos de archivos, incluyendo la serialización y deserialización de objetos. La jerarquía de 
+datos se explora desde los bits hasta los caracteres Unicode, con énfasis en cómo los datos se estructuran en registros, 
+como en el caso de un registro de empleado que podría incluir campos como el número de identificación.
+
+Resumen De Demostración de la clase File:
+Este código en Java consta de dos clases que permiten al usuario obtener información sobre un archivo o directorio específico ingresado desde la consola.
+Clase DemostracionFile: 
+Contiene el método analizarRuta(String ruta) que recibe una ruta de archivo o directorio.
+Verifica si la ruta existe.
+Si existe, muestra:
+Nombre.
+Si es un archivo o directorio.
+Si la ruta es absoluta.
+Fecha de última modificación.
+Tamaño.
+Ruta relativa y absoluta.
+Nombre del directorio padre.
+Si es un directorio, lista su contenido.
+Si no existe, informa al usuario que la ruta no existe.
+Clase PruebaDemostracionFile:
+Contiene el método main.
+Solicita al usuario que ingrese una ruta.
+Llama al método analizarRuta de DemostracionFile para mostrar la información correspondiente.
+El programa en Java permite al usuario ingresar la ruta de un archivo o directorio desde la consola y muestra información detallada sobre él, como su nombre, si es un archivo o directorio, si la ruta es absoluta, la fecha de última modificación, su tamaño, y su ruta completa. Si la ruta corresponde a un directorio, también muestra su contenido. Si la ruta no existe, informa al usuario.
