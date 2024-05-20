@@ -8,8 +8,8 @@ public class hotel {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             Habitacion[] habitacionesDisponibles = {
-                new HabitacionIndividual("Habitacion Individual", 300, 100, "Baja", 1, 1),
-                new HabitacionDoble("Habitacion Doble", 310, 200, "Media", 2, 1),
+                new HabitacionIndividual("Habitacion Individual", 300, 100, "Baja", 0, 1),
+                new HabitacionDoble("Habitacion Doble", 310, 200, "Media", 2, 2),
                 new HabitacionSuite("Habitacion Suite", 320, 300, "Alta", 3, "1")
             };
 

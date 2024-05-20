@@ -13,7 +13,7 @@ public class HabitacionDoble extends Habitacion {
         return tv;
     }
 
-    public void setTv(int tv) {
+    public void setTv(int tv) { 
         this.tv = tv;
     }
 

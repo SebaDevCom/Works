@@ -24,7 +24,7 @@ abstract class Habitacion {
     public void setTipo(String tipo){
         this.tipo = tipo;
     }
-
+ 
     public int getNumHabitacion() {
         return numHabitacion;
     }

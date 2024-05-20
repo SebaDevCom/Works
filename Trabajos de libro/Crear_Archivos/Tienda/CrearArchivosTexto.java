@@ -30,7 +30,7 @@ public class CrearArchivosTexto{
                 "En UNIX/Linux/Mac OS X escriba <ctrl> d y oprima Intro",
                 "En Windows escriba <ctrl> z y oprima Intro");
                 System.out.printf("%s\n%s",
-                "Escriba el numero del producto (> 0), Nombre, Tipo y precio.", "?");
+                "Escriba el numero del producto (> 0), Nombre del producto, tipo de producto y precio del producto.", "?");
 
                 while (teclado.hasNext())
                 {

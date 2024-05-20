@@ -27,6 +27,6 @@ public class HabitacionSuite extends Habitacion {
     }
 
     public String toString(){
-        return super.toString() +" Incluye acceso a " + this.getBar() + " mini bar.";
+        return super.toString() + ". Incluye acceso a " + this.getBar() + " mini bar.";
     }
 }

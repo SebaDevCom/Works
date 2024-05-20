@@ -28,6 +28,6 @@ public class HabitacionIndividual extends Habitacion {
     }
 
     public String toString(){
-        return super.toString() +" Incluye como extra " + this.getVentilador() + " ventilador.";
+        return super.toString() +". Incluye como extra " + this.getVentilador() + " ventilador.";
     }
 }
