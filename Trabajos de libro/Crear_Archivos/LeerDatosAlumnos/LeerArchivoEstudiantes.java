@@ -9,6 +9,8 @@ import java.util.Scanner;
 public class LeerArchivoEstudiantes {
 
     private Scanner entrada;
+    private int totalCalificaciones;
+    private int totalRegistros;
 
     
     public void abrirArchivo() {
@@ -24,8 +26,8 @@ public class LeerArchivoEstudiantes {
  
         StudentsRegistration registro = new StudentsRegistration();
         System.out.printf(
-                "%-12s%-15s%-20s%-10s%-15s%-10s\n", "NumControl",
-                "Nombre", "Apellidos", "Semestre", "Calificacion", "Promedio");
+                "%-12s%-15s%-20s%-10s%-15s\n", "NumControl",
+                "Nombre", "Apellidos", "Semestre", "Calificacion");
 
         try {
             while (entrada.hasNext()) {
@@ -35,6 +37,8 @@ public class LeerArchivoEstudiantes {
                 registro.setSemestre(entrada.next()); 
                 registro.setCalificacion(entrada.nextInt()); 
 
+                totalCalificaciones += registro.getCalificacion(); 
+                totalRegistros++;
 
                 System.out.printf("%-12d%-15s%-20s%-10s%-15d\n",
                         registro.getNumControl(), registro.getNombre(),
@@ -49,6 +53,9 @@ public class LeerArchivoEstudiantes {
             System.err.println("Error al leer del archivo.");
             System.exit(1);
         }
+
+        double promedio = (double) totalCalificaciones / totalRegistros;
+        System.out.println("El promedio del grupo es: " + promedio);
     } 
 
 
