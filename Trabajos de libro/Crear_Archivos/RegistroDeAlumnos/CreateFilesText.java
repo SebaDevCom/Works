@@ -30,34 +30,34 @@ public class CreateFilesText {
                 "cuando se le pida que escriba los datos de entrada.",
                 "En UNIX/Linux/Mac OS X escriba <ctrl> d y oprima Intro",
                 "En Windows escriba <ctrl> z y oprima Intro");
-        System.out.printf("%s\n%s\n%s\n",
-                "Escriba la matricula del alumno ¡Mayor que 0!, Nombre, Apellidos, Semestre",
-                "Calificacion del alumno", "?");
+        System.out.printf("%s%s",
+                "Escriba la matricula del alumno ¡Mayor que 0!, Nombre, Apellidos, Semestre,"," Calificacion del alumno:");
 
         while (teclado.hasNext()) {
             try {
-                registro.setNumControl(teclado.nextInt());
+                int numControl = teclado.nextInt();
+                if(numControl > 0){ 
+                registro.setNumControl(numControl);
                 registro.setNombre(teclado.next());
                 registro.setApellidos(teclado.next());
                 registro.setSemestre(teclado.next());
                 registro.setCalificacion(teclado.nextInt());
-                if (registro.getNumControl() > 0) {
                     exit.format("%d %s %s %s %d\n", registro.getNumControl(),
                             registro.getNombre(), registro.getApellidos(),
                             registro.getSemestre(), registro.getCalificacion());
                 } else {
                     System.out.println("¡El numero de control debe ser mayor a 0!");
+                    teclado.nextLine();
                 }
             } catch (FormatterClosedException formatterClosedException) {
                 System.err.println("Error: no se pudo escribir en el archivo...");
                 return;
             } catch (NoSuchElementException elementException) {
                 System.err.println("Entrada invalida, intente de nuevo...");
-                teclado.nextLine(); // clear the invalid input
+                teclado.nextLine();
             }
-            System.out.printf("%s\n%s",
-                    "Escriba la matricula del alumno ¡Mayor que 0!, Nombre, Apellidos, Semestre, Calificación",
-                    "?");
+            System.out.printf("%s",
+                    "Escriba la matricula del alumno ¡Mayor que 0!, Nombre, Apellidos, Semestre, Calificación:");
         }
     }
 
@@ -65,12 +65,5 @@ public class CreateFilesText {
         if (exit != null) {
             exit.close();
         }
-    }
-
-    public static void main(String[] args) {
-        CreateFilesText app = new CreateFilesText();
-        app.openFile();
-        app.addRecords();
-        app.cerrarArchivo();
     }
 }
