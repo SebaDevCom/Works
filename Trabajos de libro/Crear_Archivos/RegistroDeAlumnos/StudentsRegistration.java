@@ -1,6 +1,7 @@
 package RegistroDeAlumnos;
+import java.io.Serializable;
 
-public class StudentsRegistration {
+public class StudentsRegistration implements Serializable {
     private int numcontrol;
     private String nombre;
     private String apellidos;

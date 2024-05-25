@@ -1,29 +1,28 @@
 package RegistroDeAlumnos;
-import java.io.FileNotFoundException;
-import java.util.Formatter;
-import java.util.FormatterClosedException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class CreateFilesText {
 
-    private Formatter exit;
+    private ObjectOutputStream exit;
 
     public void openFile() {
         try {
-            exit = new Formatter("Alumnos.txt");
-        } catch (SecurityException securityException) {
-            System.out.println("No tienes acceso de escritura a este archivo...");
-            System.exit(1);
-        } catch (FileNotFoundException filesException) {
-            System.err.println("Error al crear archivo...");
-            System.exit(1);
+            exit = new ObjectOutputStream(new FileOutputStream("Alumnos.ser"));
+        } catch (IOException iOException) {
+            System.err.println("Error al abrir el archivo...");
         }
     }
 
     public void addRecords() {
-        // students
-        StudentsRegistration registro = new StudentsRegistration();
+        StudentsRegistration registro;
+        String nombre;
+        String apellidos;
+        String semestre;
+        int calificacion;
         Scanner teclado = new Scanner(System.in);
         System.out.printf("%s\n%s\n%s\n%s\n\n",
                 "Para terminar la entrada, escriba el indicador de fin de archivo ",
@@ -35,16 +34,16 @@ public class CreateFilesText {
 
         while (teclado.hasNext()) {
             try {
-                int numControl = teclado.nextInt();
-                if(numControl > 0){ 
-                registro.setNumControl(numControl);
-                registro.setNombre(teclado.next());
-                registro.setApellidos(teclado.next());
-                registro.setSemestre(teclado.next());
-                registro.setCalificacion(teclado.nextInt());
-                    exit.format("%d %s %s %s %d\n", registro.getNumControl(),
-                            registro.getNombre(), registro.getApellidos(),
-                            registro.getSemestre(), registro.getCalificacion());
+                int NumControl = teclado.nextInt();
+                if(NumControl > 0){ 
+                NumControl = (NumControl);
+                nombre = teclado.next();
+                apellidos = (teclado.next());
+                semestre = (teclado.next());
+                calificacion = (teclado.nextInt());
+
+                registro = new StudentsRegistration(NumControl, nombre);
+
                 } else {
                     System.out.println("¡El numero de control debe ser mayor a 0!");
                     teclado.nextLine();
