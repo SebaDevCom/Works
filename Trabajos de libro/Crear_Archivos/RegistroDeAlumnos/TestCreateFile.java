@@ -6,7 +6,7 @@ public class TestCreateFile {
         CreateFilesText aplicacion = new CreateFilesText();
         aplicacion.openFile();
         aplicacion.addRecords();
-        aplicacion.cerrarArchivo();
+        aplicacion.closeFile();
     }
 
 }

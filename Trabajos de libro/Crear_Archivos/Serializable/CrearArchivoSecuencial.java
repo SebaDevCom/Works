@@ -12,8 +12,7 @@ public class CrearArchivoSecuencial {
 
     public void abrirArchivo() {
         try {
-            salida = new ObjectOutputStream(
-                    new FileOutputStream("clientes.ser"));
+            salida = new ObjectOutputStream(new FileOutputStream("clientes.ser"));
         } catch (IOException ioException) {
             System.err.println("Error al abrir el archivo.");
         }
@@ -47,6 +46,7 @@ public class CrearArchivoSecuencial {
                 } else {
                     System.out.println("El numero de cuenta debe ser mayor de 0.");
                 }
+                //AQui
             } catch (IOException ioException) {
                 System.err.println("Error al escribir en el archivo.");
                 return;

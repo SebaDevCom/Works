@@ -1,43 +1,36 @@
 package LeerDatosAlumnos;
 
 import RegistroDeAlumnos.StudentsRegistration;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class LeerArchivoEstudiantes {
 
-    private Scanner entrada;
+    private ObjectInputStream entrada;
     private int totalCalificaciones;
     private int totalRegistros;
 
-    
     public void abrirArchivo() {
         try {
-            entrada = new Scanner(new File("Alumnos.txt"));
-        } catch (FileNotFoundException fileNotFoundException) {
+            entrada = new ObjectInputStream(new FileInputStream("Alumnos.ser"));
+        } catch (IOException ioException) {
             System.err.println("Error al abrir el archivo.");
             System.exit(1);
         }
-    } 
+    }
 
     public void leerRegistros() {
- 
-        StudentsRegistration registro = new StudentsRegistration();
         System.out.printf(
                 "%-12s%-15s%-20s%-10s%-15s\n", "NumControl",
                 "Nombre", "Apellidos", "Semestre", "Calificacion");
 
         try {
-            while (entrada.hasNext()) {
-                registro.setNumControl(entrada.nextInt()); 
-                registro.setNombre(entrada.next()); 
-                registro.setApellidos(entrada.next());
-                registro.setSemestre(entrada.next()); 
-                registro.setCalificacion(entrada.nextInt()); 
+            while (true) { 
+                StudentsRegistration registro = (StudentsRegistration) entrada.readObject();
 
-                totalCalificaciones += registro.getCalificacion(); 
+                totalCalificaciones += registro.getCalificacion();
                 totalRegistros++;
 
                 System.out.printf("%-12d%-15s%-20s%-10s%-15d\n",
@@ -45,23 +38,31 @@ public class LeerArchivoEstudiantes {
                         registro.getApellidos(), registro.getSemestre(),
                         registro.getCalificacion());
             }
-        } catch (NoSuchElementException elementException) {
-            System.err.println("El archivo no está bien formado.");
-            entrada.close();
-            System.exit(1);
-        } catch (IllegalStateException stateException) {
-            System.err.println("Error al leer del archivo.");
-            System.exit(1);
+        } catch (EOFException eofException) {
+        } catch (ClassNotFoundException classNotFoundException) {
+            System.err.println("No se pudo crear el objeto...");
+        } catch (IOException ioException) {
+            System.err.println("Error al leer del archivo...");
+        } finally {
+            cerrarArchivo();
         }
 
-        double promedio = (double) totalCalificaciones / totalRegistros;
-        System.out.println("El promedio del grupo es: " + promedio);
-    } 
-
+        if (totalRegistros > 0) {
+            double promedio = (double) totalCalificaciones / totalRegistros;
+            System.out.println("El promedio del grupo es: " + promedio);
+        } else {
+            System.out.println("No se encontraron registros...");
+        }
+    }
 
     public void cerrarArchivo() {
-        if (entrada != null) {
-            entrada.close(); 
+        try {
+            if (entrada != null) {
+                entrada.close();
+            }
+        } catch (IOException ioException) {
+            System.err.println("Error al cerrar el archivo...");
+            System.exit(1);
         }
-    } 
+    }
 }

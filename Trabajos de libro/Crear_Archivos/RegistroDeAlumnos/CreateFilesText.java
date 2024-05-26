@@ -1,4 +1,5 @@
 package RegistroDeAlumnos;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -7,12 +8,12 @@ import java.util.Scanner;
 
 public class CreateFilesText {
 
-    private ObjectOutputStream exit;
+    private ObjectOutputStream output;
 
     public void openFile() {
         try {
-            exit = new ObjectOutputStream(new FileOutputStream("Alumnos.ser"));
-        } catch (IOException iOException) {
+            output = new ObjectOutputStream(new FileOutputStream("Alumnos.ser"));
+        } catch (IOException ioException) {
             System.err.println("Error al abrir el archivo...");
         }
     }
@@ -29,40 +30,44 @@ public class CreateFilesText {
                 "cuando se le pida que escriba los datos de entrada.",
                 "En UNIX/Linux/Mac OS X escriba <ctrl> d y oprima Intro",
                 "En Windows escriba <ctrl> z y oprima Intro");
-        System.out.printf("%s%s",
-                "Escriba la matricula del alumno ¡Mayor que 0!, Nombre, Apellidos, Semestre,"," Calificacion del alumno:");
+        System.out.printf("%s",
+        "Escriba la matricula del alumno ¡Mayor que 0!, Nombre, Apellidos, Semestre, Calificación del alumno:");
 
         while (teclado.hasNext()) {
             try {
-                int NumControl = teclado.nextInt();
-                if(NumControl > 0){ 
-                NumControl = (NumControl);
-                nombre = teclado.next();
-                apellidos = (teclado.next());
-                semestre = (teclado.next());
-                calificacion = (teclado.nextInt());
+                int numControl = teclado.nextInt();
+                if (numControl > 0) {
+                    nombre = teclado.next();
+                    apellidos = teclado.next();
+                    semestre = teclado.next();
+                    calificacion = teclado.nextInt();
 
-                registro = new StudentsRegistration(NumControl, nombre);
-
+                    registro = new StudentsRegistration(numControl, nombre, apellidos, semestre, calificacion, calificacion);
+                    output.writeObject(registro);
                 } else {
-                    System.out.println("¡El numero de control debe ser mayor a 0!");
+                    System.out.println("¡El número de control debe ser mayor a 0!");
                     teclado.nextLine();
                 }
-            } catch (FormatterClosedException formatterClosedException) {
-                System.err.println("Error: no se pudo escribir en el archivo...");
+            } catch (IOException ioException) {
+                System.err.println("Error al escribir en el archivo...");
                 return;
             } catch (NoSuchElementException elementException) {
-                System.err.println("Entrada invalida, intente de nuevo...");
-                teclado.nextLine();
+                System.err.println("Entrada inválida, intente de nuevo...");
+                teclado.nextLine(); 
             }
             System.out.printf("%s",
-                    "Escriba la matricula del alumno ¡Mayor que 0!, Nombre, Apellidos, Semestre, Calificación:");
+                    "Escriba la matricula del alumno ¡Mayor que 0!, Nombre, Apellidos, Semestre, Calificación del alumno:");
         }
     }
 
-    public void cerrarArchivo() {
-        if (exit != null) {
-            exit.close();
+    public void closeFile() {
+        try {
+            if (output != null) {
+                output.close();
+            }
+        } catch (IOException ioException) {
+            System.err.println("Error al cerrar el archivo.");
+            System.exit(1);
         }
     }
 }
