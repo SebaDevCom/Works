@@ -17,7 +17,7 @@ public class try_catch_finally {
             System.err.println("La excepcion se manejo en el metodo lanzaExcepcion");
             throw excepcion;
         } finally {
-            System.err.println("Se ejecuto finally en lanzaExcepcion");
+            System.err.println("Se ejecuto finally en lanzaExcepcion"); 
         }
 
     }

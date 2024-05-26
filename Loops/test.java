@@ -1,36 +1,16 @@
 package Loops;
 
-public class test {
+public class test{
+    public static void main(String [] args){
+        for(int i = 1; i <= 10; i++){ 
+            System.out.println("Tabla del: " + i );
+            for(int j = 1; j <= 10; j++){
+                int resultado = i*j;
+                System.out.println(i + " X " + j + " = " + resultado );
+            } 
 
-    public static void main(String[] args) {
+            System.out.println();
 
-        System.out.println("Bucle Con For: ");
-        System.out.println();
-
-        int i; //Siempre tenemos que declarar la variable
-        for (i = 0; i < 20; i++) { //Siempre tenemos que declarar la variable con la condicion
-            System.out.println("Linea: " + i); // Aqui es necesario para mirar los resultados
         }
-
-        System.out.println();
-        System.out.println("Bucle While: ");
-        System.out.println();
-
-        int contador = 0;
-        while (contador < 20) {
-            System.out.println("Linea: " + contador);
-            contador++;
-        }
-
-        System.out.println();
-        System.out.println("Bucle do-while: ");
-        System.out.println();
-
-        int contadoor = 0;
-        do {
-            System.out.println("Linea: " + contadoor);
-            contadoor++;
-        } while (contadoor < 20);
-
     }
 }
