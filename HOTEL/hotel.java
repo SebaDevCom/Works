@@ -1,6 +1,8 @@
 package HOTEL;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class hotel {
@@ -13,6 +15,7 @@ public class hotel {
                 new HabitacionSuite("Habitacion Suite", 320, 300, "Alta", 3, "1")
             };
 
+            List<Cliente> clientes = new ArrayList<>();
             Factura[] facturas = new Factura[10];
 
             int opcion = 0;
@@ -42,7 +45,7 @@ public class hotel {
                                     Habitacion habitacionSeleccionada = habitacionesDisponibles[numHabitacion - 1];
                                     if (habitacionSeleccionada.getDisponibilidad() > 0) {
                                         System.out.println("El costo total es: $" + habitacionSeleccionada.calcularCostoTotal());
-                                        scanner.nextLine(); 
+                                        scanner.nextLine();
                                         String nombreCliente;
                                         boolean nombreValido = false;
                                         do {
@@ -54,7 +57,7 @@ public class hotel {
                                                 nombreValido = true;
                                             }
                                         } while (!nombreValido);
-                                        
+
                                         String rfcCliente;
                                         boolean rfcValido = false;
                                         do {
@@ -66,7 +69,7 @@ public class hotel {
                                                 rfcValido = true;
                                             }
                                         } while (!rfcValido);
-                                        
+
                                         String direccionCliente;
                                         boolean direccionValida = false;
                                         do {
@@ -81,15 +84,15 @@ public class hotel {
 
                                         System.out.println("¡Registro exitoso, hasta luego!");
 
-
                                         Cliente cliente = new Cliente(nombreCliente, rfcCliente, direccionCliente);
+                                        clientes.add(cliente);
                                         facturas[numFacturas] = new Factura(cliente, habitacionSeleccionada);
                                         numFacturas++;
                                         habitacionSeleccionada.reservarHabitacion();
-                                        datosValidos = true; 
+                                        datosValidos = true;
                                     } else {
                                         System.out.println("Lo sentimos no hay disponibilidad para esta habitación.");
-                                        datosValidos = true; 
+                                        datosValidos = true;
                                     }
                                 } catch (IllegalArgumentException e) {
                                     System.out.println("Error: " + e.getMessage());
@@ -109,10 +112,13 @@ public class hotel {
                                 System.out.println(facturas[i]);
                             }
                         }
-                        case 4 ->
+                        case 4 -> {
                             System.out.println("Saliendo...");
-                        default ->
+                            FileHandler.saveClientes(clientes);
+                        }
+                        default -> {
                             System.out.println("Opción inválida...");
+                        }
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar una opción valida...");
