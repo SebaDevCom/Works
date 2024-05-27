@@ -9,10 +9,6 @@ public class StudentsRegistration implements Serializable {
     private int calificacion;
     private double promedio;
 
-    public StudentsRegistration(){
-        this(0, "", "", "", 0, 0);
-    }
-
     public StudentsRegistration(int numcontrol,String nombre, String apellidos, String semestre, int calificacion, double promedio){
         this.numcontrol = numcontrol;
         this.nombre = nombre;
