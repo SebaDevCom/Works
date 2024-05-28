@@ -13,7 +13,6 @@ public class CreateFilesText {
     public void openFile() {
         try {
             output = new ObjectOutputStream(new FileOutputStream("Alumnos.ser"));
-            output = new ObjectOutputStream(new FileOutputStream("Copia.ser"));
         } catch (IOException ioException) {
             System.err.println("Error al abrir el archivo...");
         }
