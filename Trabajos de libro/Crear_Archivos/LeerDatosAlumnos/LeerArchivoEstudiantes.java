@@ -30,8 +30,8 @@ public class LeerArchivoEstudiantes {
                 "%-12s%-15s%-20s%-10s%-15s\n", "NumControl",
                 "Nombre", "Apellidos", "Semestre", "Calificacion");
         salida.printf(
-                "%-12s%-15s%-20s%-10s%-15s\n", "NumControl",
-                "Nombre", "Apellidos", "Semestre", "Calificacion");
+                "%-12s%-15s%-20s%-10s%-15s%-15s\n", "NumControl",
+                "Nombre", "Apellidos", "Semestre", "Calificacion", "Promedio");
 
         try {
             while (true) {
@@ -40,14 +40,16 @@ public class LeerArchivoEstudiantes {
                 totalCalificaciones += registro.getCalificacion();
                 totalRegistros++;
 
+                double promedioAcum = (double) totalCalificaciones / totalRegistros;
+
                 System.out.printf("%-12d%-15s%-20s%-10s%-15d\n",
                         registro.getNumControl(), registro.getNombre(),
                         registro.getApellidos(), registro.getSemestre(),
-                        registro.getCalificacion());
+                        registro.getCalificacion()); 
                 salida.printf("%-12d%-15s%-20s%-10s%-15d\n",
                         registro.getNumControl(), registro.getNombre(),
                         registro.getApellidos(), registro.getSemestre(),
-                        registro.getCalificacion());
+                        registro.getCalificacion(), promedioAcum);
             }
          } catch (EOFException eofException) {
      } catch (ClassNotFoundException classNotFoundException) {
