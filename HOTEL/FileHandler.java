@@ -8,9 +8,9 @@ public class FileHandler {
 
     private ObjectOutputStream output;
 
-    public void openFile(String filename) {
+    public void openFile() {
         try {
-            output = new ObjectOutputStream(new FileOutputStream(filename));
+            output = new ObjectOutputStream(new FileOutputStream("Facturas.txt"));
         } catch (IOException ioException) {
             System.err.println("Error al abrir el archivo...");
         }

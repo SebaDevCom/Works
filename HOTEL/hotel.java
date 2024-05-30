@@ -21,6 +21,15 @@ public class hotel {
 
         while (true) {
             try {
+                System.out.println("""
+                                   
+                                   \u2580\u2588\u2580 \u2591\u2588\u2580\u2580\u2580\u2588 \u2591\u2588\u2580\u2580\u2580\u2588 
+                                   \u2591\u2588\u2500 \u2591\u2588\u2500\u2500\u2591\u2588 \u2500\u2580\u2580\u2580\u2584\u2584 
+                                   \u2584\u2588\u2584 \u2591\u2588\u2584\u2584\u2584\u2588 \u2591\u2588\u2584\u2584\u2584\u2588 \u00a9 2024""" //
+                //
+                //
+                );
+                                        System.out.println();
                 System.out.println("Hotel los tilinos");
                 System.out.println("Menú:");
                 System.out.println("1) Reservar Habitación");
@@ -65,7 +74,7 @@ public class hotel {
                                         System.out.print("Ingrese el RFC del cliente: ");
                                         rfcCliente = scanner.nextLine();
                                         if (!rfcCliente.matches("[a-zA-Z0-9]+")) {
-                                            System.out.println("Error: El RFC del cliente debe contener solo letras y números.");
+                                            System.out.println("Error: El RFC del cliente debe contener solo letras y números...");
                                         } else {
                                             break;
                                         }
@@ -76,7 +85,7 @@ public class hotel {
                                         System.out.print("Ingrese la dirección del cliente: ");
                                         direccionCliente = scanner.nextLine();
                                         if (!direccionCliente.matches("[\\p{L}0-9\\s#]+")) {
-                                            System.out.println("Error: La dirección del cliente debe contener solo letras, números y caracteres especiales permitidos.");
+                                            System.out.println("Error: La dirección del cliente debe contener solo letras, números y caracteres especiales permitidos...");
                                         } else {
                                             break;
                                         }
@@ -92,13 +101,13 @@ public class hotel {
                                     System.out.println("Factura generada: " + factura);
                                     datosValidos = true;
                                 } else {
-                                    System.out.println("Habitación no disponible. Seleccione otra.");
+                                    System.out.println("Habitación no disponible... ¡Seleccione otra!");
                                 }
                             } catch (InputMismatchException e) {
-                                System.out.println("Entrada inválida. Intente nuevamente.");
+                                System.out.println("Entrada inválida... ¡Intente nuevamente!");
                                 scanner.nextLine(); 
                             } catch (ArrayIndexOutOfBoundsException e) {
-                                System.out.println("Número de habitación inválido. Intente nuevamente.");
+                                System.out.println("Número de habitación inválido... ¡Intente nuevamente!");
                                 scanner.nextLine(); 
                             }
                         } while (!datosValidos);
@@ -116,18 +125,18 @@ public class hotel {
                         }
                     }
                     case 4 -> {
-                        System.out.println("Guardando facturas y saliendo...");
+                        System.out.println("Guardando facturas, bye :3");
                         fileHandler.openFile("Facturas.ser");
                         fileHandler.addRecords(facturas, numFacturas);
                         fileHandler.closeFile();
-                        System.out.println("Facturas guardadas en archivo.");
+                        System.out.println("Confirmo, ya se guardaron xD.");
                         scanner.close();
                         System.exit(0);
                     }
-                    default -> System.out.println("Opción no válida. Intente nuevamente.");
+                    default -> System.out.println("Opción no válida... ¡Intente nuevamente!");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida. Intente nuevamente.");
+                System.out.println("Entrada inválida... ¡Intente nuevamente!");
                 scanner.nextLine(); 
             }
         }

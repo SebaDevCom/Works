@@ -1,6 +1,6 @@
 package HOTEL;
 
-public class MainFileReader {
+public class LeerCopia {
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReader();
