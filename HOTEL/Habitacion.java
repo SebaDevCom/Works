@@ -1,6 +1,8 @@
 package HOTEL;
 
-abstract class Habitacion {
+import java.io.Serializable;
+
+abstract class Habitacion implements Serializable {
 
     private static int contadorHabitaciones = 1;
     private String tipo;

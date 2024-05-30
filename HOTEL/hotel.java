@@ -1,8 +1,6 @@
 package HOTEL;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class hotel {
@@ -10,16 +8,24 @@ public class hotel {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             Habitacion[] habitacionesDisponibles = {
-                new HabitacionIndividual("Habitacion Individual", 300, 100, "Baja", 0, 1),
-                new HabitacionDoble("Habitacion Doble", 310, 200, "Media", 2, 2),
-                new HabitacionSuite("Habitacion Suite", 320, 300, "Alta", 3, "1")
+                new HabitacionIndividual("Habitacion Individual", 300, 100, "Baja", 1, 1),
+                new HabitacionDoble("Habitacion Doble", 310, 200, "Media", 3, 1),
+                new HabitacionSuite("Habitacion Suite", 320, 300, "Alta", 4, "1")
             };
 
-            List<Cliente> clientes = new ArrayList<>();
             Factura[] facturas = new Factura[10];
-
             int opcion = 0;
             int numFacturas = 0;
+
+            FileHandler fileHandler = new FileHandler();
+
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                fileHandler.openFile("Facturas.ser");
+                fileHandler.addRecords(facturas, numFacturas);
+                fileHandler.closeFile();
+                System.out.println("Facturas guardadas en archivo.");
+            }));
+
             do {
                 try {
                     System.out.println("Hotel los tilinos");
@@ -85,7 +91,6 @@ public class hotel {
                                         System.out.println("¡Registro exitoso, hasta luego!");
 
                                         Cliente cliente = new Cliente(nombreCliente, rfcCliente, direccionCliente);
-                                        clientes.add(cliente);
                                         facturas[numFacturas] = new Factura(cliente, habitacionSeleccionada);
                                         numFacturas++;
                                         habitacionSeleccionada.reservarHabitacion();
@@ -114,14 +119,13 @@ public class hotel {
                         }
                         case 4 -> {
                             System.out.println("Saliendo...");
-                            FileHandler.saveClientes(clientes);
                         }
                         default -> {
                             System.out.println("Opción inválida...");
                         }
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println("Debe ingresar una opción valida...");
+                    System.out.println("Debe ingresar una opción válida...");
                     scanner.nextLine();
                     opcion = 0;
                 }
