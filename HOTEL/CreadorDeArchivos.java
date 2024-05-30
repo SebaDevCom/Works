@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class FileHandler {
+public class CreadorDeArchivos {
 
     private ObjectOutputStream output;
 
@@ -32,7 +32,7 @@ public class FileHandler {
                 output.close();
             }
         } catch (IOException ioException) {
-            System.err.println("Error al cerrar el archivo.");
+            System.err.println("Error al cerrar el archivo...");
             System.exit(1);
         }
     }

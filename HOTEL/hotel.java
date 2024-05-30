@@ -17,7 +17,7 @@ public class hotel {
         int opcion = 0;
         int numFacturas = 0;
 
-        FileHandler fileHandler = new FileHandler();
+        CreadorDeArchivos fileHandler = new CreadorDeArchivos();
 
         while (true) {
             try {

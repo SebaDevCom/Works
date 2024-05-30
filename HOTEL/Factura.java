@@ -2,7 +2,7 @@ package HOTEL;
 
 import java.io.Serializable;
 
-class Factura implements Serializable {
+ class Factura implements Serializable {
 
     private Cliente cliente;
     private Habitacion habitacion;
