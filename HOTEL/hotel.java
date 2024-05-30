@@ -6,130 +6,130 @@ import java.util.Scanner;
 public class hotel {
 
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            Habitacion[] habitacionesDisponibles = {
-                new HabitacionIndividual("Habitacion Individual", 300, 100, "Baja", 1, 1),
-                new HabitacionDoble("Habitacion Doble", 310, 200, "Media", 3, 1),
-                new HabitacionSuite("Habitacion Suite", 320, 300, "Alta", 4, "1")
-            };
+        Scanner scanner = new Scanner(System.in);
+        Habitacion[] habitacionesDisponibles = {
+            new HabitacionIndividual("Habitacion Individual", 300, 100, "Baja", 1, 1),
+            new HabitacionDoble("Habitacion Doble", 310, 200, "Media", 3, 1),
+            new HabitacionSuite("Habitacion Suite", 320, 300, "Alta", 4, "1")
+        };
 
-            Factura[] facturas = new Factura[10];
-            int opcion = 0;
-            int numFacturas = 0;
+        Factura[] facturas = new Factura[10];
+        int opcion = 0;
+        int numFacturas = 0;
 
-            FileHandler fileHandler = new FileHandler();
+        FileHandler fileHandler = new FileHandler();
 
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                fileHandler.openFile("Facturas.ser");
-                fileHandler.addRecords(facturas, numFacturas);
-                fileHandler.closeFile();
-                System.out.println("Facturas guardadas en archivo.");
-            }));
+        while (true) {
+            try {
+                System.out.println("Hotel los tilinos");
+                System.out.println("Menú:");
+                System.out.println("1) Reservar Habitación");
+                System.out.println("2) Mostrar información de habitaciones");
+                System.out.println("3) Facturas");
+                System.out.println("4) Salir");
+                System.out.print("Ingrese su opción: ");
+                opcion = scanner.nextInt();
 
-            do {
-                try {
-                    System.out.println("Hotel los tilinos");
-                    System.out.println("Menú:");
-                    System.out.println("1) Reservar Habitación");
-                    System.out.println("2) Mostrar información de habitaciones");
-                    System.out.println("3) Facturas");
-                    System.out.println("4) Salir");
-                    System.out.print("Ingrese su opción: ");
-                    opcion = scanner.nextInt();
-
-                    switch (opcion) {
-                        case 1 -> {
-                            boolean datosValidos = false;
-                            do {
-                                try {
-                                    System.out.println("Habitaciones Disponibles:");
-                                    for (int i = 0; i < habitacionesDisponibles.length; i++) {
-                                        System.out.println((i + 1) + ") " + habitacionesDisponibles[i].getTipo() + ": " + habitacionesDisponibles[i].getDisponibilidad() + " Disponibles");
-                                    }
-                                    System.out.print("Seleccione el número de la habitación que desea reservar: ");
-                                    int numHabitacion = scanner.nextInt();
-                                    Habitacion habitacionSeleccionada = habitacionesDisponibles[numHabitacion - 1];
-                                    if (habitacionSeleccionada.getDisponibilidad() > 0) {
-                                        System.out.println("El costo total es: $" + habitacionSeleccionada.calcularCostoTotal());
-                                        scanner.nextLine();
-                                        String nombreCliente;
-                                        boolean nombreValido = false;
-                                        do {
-                                            System.out.print("Ingrese el nombre del cliente: ");
-                                            nombreCliente = scanner.nextLine();
-                                            if (!nombreCliente.matches("[\\p{L}\\s]+")) {
-                                                System.out.println("Error: El nombre del cliente debe contener solo letras y espacios.");
-                                            } else {
-                                                nombreValido = true;
-                                            }
-                                        } while (!nombreValido);
-
-                                        String rfcCliente;
-                                        boolean rfcValido = false;
-                                        do {
-                                            System.out.print("Ingrese el RFC del cliente: ");
-                                            rfcCliente = scanner.nextLine();
-                                            if (!rfcCliente.matches("[a-zA-Z0-9]+")) {
-                                                System.out.println("Error: El RFC del cliente debe contener solo letras y números.");
-                                            } else {
-                                                rfcValido = true;
-                                            }
-                                        } while (!rfcValido);
-
-                                        String direccionCliente;
-                                        boolean direccionValida = false;
-                                        do {
-                                            System.out.print("Ingrese la dirección del cliente: ");
-                                            direccionCliente = scanner.nextLine();
-                                            if (!direccionCliente.matches("[\\p{L}0-9\\s#]+")) {
-                                                System.out.println("Error: La dirección del cliente debe contener solo letras, números y caracteres especiales permitidos.");
-                                            } else {
-                                                direccionValida = true;
-                                            }
-                                        } while (!direccionValida);
-
-                                        System.out.println("¡Registro exitoso, hasta luego!");
-
-                                        Cliente cliente = new Cliente(nombreCliente, rfcCliente, direccionCliente);
-                                        facturas[numFacturas] = new Factura(cliente, habitacionSeleccionada);
-                                        numFacturas++;
-                                        habitacionSeleccionada.reservarHabitacion();
-                                        datosValidos = true;
-                                    } else {
-                                        System.out.println("Lo sentimos no hay disponibilidad para esta habitación.");
-                                        datosValidos = true;
-                                    }
-                                } catch (IllegalArgumentException e) {
-                                    System.out.println("Error: " + e.getMessage());
+                switch (opcion) {
+                    case 1 -> {
+                        boolean datosValidos = false;
+                        do {
+                            try {
+                                System.out.println("Habitaciones Disponibles:");
+                                for (int i = 0; i < habitacionesDisponibles.length; i++) {
+                                    System.out.println((i + 1) + ") " + habitacionesDisponibles[i].getTipo() + ": " + habitacionesDisponibles[i].getDisponibilidad() + " Disponibles");
                                 }
-                            } while (!datosValidos);
-                        }
-                        case 2 -> {
-                            System.out.println("Información de habitaciones:");
-                            for (Habitacion habitacion : habitacionesDisponibles) {
-                                System.out.println(habitacion.toString());
+                                System.out.print("Seleccione el número de la habitación que desea reservar: ");
+                                int numHabitacion = scanner.nextInt();
+                                if (numHabitacion < 1 || numHabitacion > habitacionesDisponibles.length) {
+                                    throw new ArrayIndexOutOfBoundsException("Número de habitación inválido.");
+                                }
+
+                                Habitacion habitacionSeleccionada = habitacionesDisponibles[numHabitacion - 1];
+                                if (habitacionSeleccionada.getDisponibilidad() > 0) {
+                                    scanner.nextLine(); 
+
+                                    String nombreCliente;
+                                    while (true) {
+                                        System.out.print("Ingrese el nombre del cliente: ");
+                                        nombreCliente = scanner.nextLine();
+                                        if (!nombreCliente.matches("[\\p{L}\\s]+")) {
+                                            System.out.println("Error: El nombre del cliente debe contener solo letras y espacios.");
+                                        } else {
+                                            break;
+                                        }
+                                    }
+
+                                    String rfcCliente;
+                                    while (true) {
+                                        System.out.print("Ingrese el RFC del cliente: ");
+                                        rfcCliente = scanner.nextLine();
+                                        if (!rfcCliente.matches("[a-zA-Z0-9]+")) {
+                                            System.out.println("Error: El RFC del cliente debe contener solo letras y números.");
+                                        } else {
+                                            break;
+                                        }
+                                    }
+
+                                    String direccionCliente;
+                                    while (true) {
+                                        System.out.print("Ingrese la dirección del cliente: ");
+                                        direccionCliente = scanner.nextLine();
+                                        if (!direccionCliente.matches("[\\p{L}0-9\\s#]+")) {
+                                            System.out.println("Error: La dirección del cliente debe contener solo letras, números y caracteres especiales permitidos.");
+                                        } else {
+                                            break;
+                                        }
+                                    }
+
+                                    Cliente cliente = new Cliente(nombreCliente, rfcCliente, direccionCliente);
+                                    Factura factura = new Factura(cliente, habitacionSeleccionada);
+
+                                    facturas[numFacturas++] = factura;
+                                    habitacionSeleccionada.reservarHabitacion();
+
+                                    System.out.println("Habitación reservada con éxito!");
+                                    System.out.println("Factura generada: " + factura);
+                                    datosValidos = true;
+                                } else {
+                                    System.out.println("Habitación no disponible. Seleccione otra.");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("Entrada inválida. Intente nuevamente.");
+                                scanner.nextLine(); 
+                            } catch (ArrayIndexOutOfBoundsException e) {
+                                System.out.println("Número de habitación inválido. Intente nuevamente.");
+                                scanner.nextLine(); 
                             }
-                        }
-                        case 3 -> {
-                            System.out.println("Facturas:");
-                            for (int i = 0; i < numFacturas; i++) {
-                                System.out.println("Factura " + (i + 1) + ":");
-                                System.out.println(facturas[i]);
-                            }
-                        }
-                        case 4 -> {
-                            System.out.println("Saliendo...");
-                        }
-                        default -> {
-                            System.out.println("Opción inválida...");
+                        } while (!datosValidos);
+                    }
+                    case 2 -> {
+                        System.out.println("Información de habitaciones:");
+                        for (Habitacion habitacion : habitacionesDisponibles) {
+                            System.out.println(habitacion);
                         }
                     }
-                } catch (InputMismatchException e) {
-                    System.out.println("Debe ingresar una opción válida...");
-                    scanner.nextLine();
-                    opcion = 0;
+                    case 3 -> {
+                        System.out.println("Facturas generadas:");
+                        for (int i = 0; i < numFacturas; i++) {
+                            System.out.println(facturas[i]);
+                        }
+                    }
+                    case 4 -> {
+                        System.out.println("Guardando facturas y saliendo...");
+                        fileHandler.openFile("Facturas.ser");
+                        fileHandler.addRecords(facturas, numFacturas);
+                        fileHandler.closeFile();
+                        System.out.println("Facturas guardadas en archivo.");
+                        scanner.close();
+                        System.exit(0);
+                    }
+                    default -> System.out.println("Opción no válida. Intente nuevamente.");
                 }
-            } while (opcion != 4);
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Intente nuevamente.");
+                scanner.nextLine(); 
+            }
         }
     }
 }
