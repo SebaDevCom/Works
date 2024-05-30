@@ -1,6 +1,6 @@
 package HOTEL;
 
-public class LeerCopia {
+public class LeerArchivo {
 
     public static void main(String[] args) {
         LeerArchivosHotel lector = new LeerArchivosHotel();
