@@ -126,7 +126,7 @@ public class hotel {
                     }
                     case 4 -> {
                         System.out.println("Guardando facturas, bye :3");
-                        fileHandler.openFile("Facturas.ser");
+                        fileHandler.openFile();
                         fileHandler.addRecords(facturas, numFacturas);
                         fileHandler.closeFile();
                         System.out.println("Confirmo, ya se guardaron xD.");

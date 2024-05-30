@@ -10,7 +10,7 @@ public class FileHandler {
 
     public void openFile() {
         try {
-            output = new ObjectOutputStream(new FileOutputStream("Facturas.txt"));
+            output = new ObjectOutputStream(new FileOutputStream("Facturas.ser"));
         } catch (IOException ioException) {
             System.err.println("Error al abrir el archivo...");
         }
