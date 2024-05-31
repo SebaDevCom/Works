@@ -98,7 +98,6 @@ public class hotel {
                                     habitacionSeleccionada.reservarHabitacion();
 
                                     System.out.println("Habitación reservada con éxito!");
-                                    System.out.println("Factura generada: " + factura);
                                     datosValidos = true;
                                 } else {
                                     System.out.println("Habitación no disponible... ¡Seleccione otra!");
@@ -125,11 +124,10 @@ public class hotel {
                         }
                     }
                     case 4 -> {
-                        System.out.println("Guardando facturas, bye :3");
                         fileHandler.openFile();
                         fileHandler.addRecords(facturas, numFacturas);
                         fileHandler.closeFile();
-                        System.out.println("Confirmo, ya se guardaron xD.");
+                        System.out.println("Se guardaron todos los datos nuevos...");
                         scanner.close();
                         System.exit(0);
                     }
