@@ -89,13 +89,32 @@ public class hotel {
                                         }
                                     }
 
+                                    int dias;
+                                    while (true) {
+                                        try {
+                                            System.out.print("Ingrese el número de días de estancia: ");
+                                            dias = scanner.nextInt();
+                                            if (dias <= 0) {
+                                                System.out.println("Error: El número de días debe ser mayor que cero.");
+                                            } else {
+                                                break;
+                                            }
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("Entrada inválida... ¡Intente nuevamente!");
+                                            scanner.nextLine();
+                                        }
+                                    }
+
                                     Cliente cliente = new Cliente(nombreCliente, rfcCliente, direccionCliente);
-                                    Factura factura = new Factura(cliente, habitacionSeleccionada);
+                                    Factura factura = new Factura(cliente, habitacionSeleccionada, dias);
 
                                     facturas[numFacturas++] = factura;
                                     habitacionSeleccionada.reservarHabitacion();
 
-                                    fileHandler.addRecord(factura); 
+                                    String fileName = "Factura_de_" + cliente.getRfc() + ".txt";
+                                    fileHandler.openFile(fileName);
+                                    fileHandler.addRecord(factura);
+                                    fileHandler.closeFile();
 
                                     System.out.println("Habitación reservada con éxito!");
                                     datosValidos = true;
@@ -122,6 +141,7 @@ public class hotel {
                         lector.readFacturas();
                     }
                     case 4 -> {
+                        System.out.println("¡Hasta luego!");
                         scanner.close();
                         System.exit(0);
                     }
