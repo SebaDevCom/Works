@@ -2,7 +2,7 @@ package HOTEL;
 
 import java.io.Serializable;
 
- class Factura implements Serializable {
+class Factura implements Serializable {
 
     private Cliente cliente;
     private Habitacion habitacion;
@@ -20,12 +20,12 @@ import java.io.Serializable;
         this.cliente = cliente;
     }
 
-    public void setHabitacion(Habitacion habitacion) {
-        this.habitacion = habitacion;
-    }
-
     public Habitacion getHabitacion() {
         return habitacion;
+    }
+
+    public void setHabitacion(Habitacion habitacion) {
+        this.habitacion = habitacion;
     }
 
     @Override
@@ -33,3 +33,4 @@ import java.io.Serializable;
         return "Cliente - " + cliente + ", " + habitacion.getTipo() + ", Total: " + habitacion.getPrecio();
     }
 }
+

@@ -1,39 +1,17 @@
 package HOTEL;
 
-import java.io.FileOutputStream;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 public class CreadorDeArchivos {
 
-    private ObjectOutputStream output;
-
-    public void openFile() {
-        try {
-            output = new ObjectOutputStream(new FileOutputStream("Facturas.ser"));
+    public void addRecord(Factura factura) {
+        String fileName = "Factura_" + factura.getCliente().getRfc() + ".txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write(factura.toString());
         } catch (IOException ioException) {
-            System.err.println("Error al abrir el archivo...");
-        }
-    }
-
-    public void addRecords(Factura[] facturas, int numFacturas) {
-        try {
-            for (int i = 0; i < numFacturas; i++) {
-                output.writeObject(facturas[i]);
-            }
-        } catch (IOException ioException) {
-            System.err.println("Error al escribir en el archivo...");
-        }
-    }
-
-    public void closeFile() {
-        try {
-            if (output != null) {
-                output.close();
-            }
-        } catch (IOException ioException) {
-            System.err.println("Error al cerrar el archivo...");
-            System.exit(1);
+            System.err.println("Error al escribir en el archivo " + fileName);
         }
     }
 }

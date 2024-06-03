@@ -25,11 +25,9 @@ public class hotel {
                                    
                                    \u2580\u2588\u2580 \u2591\u2588\u2580\u2580\u2580\u2588 \u2591\u2588\u2580\u2580\u2580\u2588 
                                    \u2591\u2588\u2500 \u2591\u2588\u2500\u2500\u2591\u2588 \u2500\u2580\u2580\u2580\u2584\u2584 
-                                   \u2584\u2588\u2584 \u2591\u2588\u2584\u2584\u2584\u2588 \u2591\u2588\u2584\u2584\u2584\u2588 \u00a9 2024""" //
-                //
-                //
+                                   \u2584\u2588\u2584 \u2591\u2588\u2584\u2584\u2584\u2588 \u2591\u2588\u2584\u2584\u2584\u2588 \u00a9 2024"""
                 );
-                                        System.out.println();
+                System.out.println();
                 System.out.println("Hotel los tilinos");
                 System.out.println("Menú:");
                 System.out.println("1) Reservar Habitación");
@@ -97,6 +95,8 @@ public class hotel {
                                     facturas[numFacturas++] = factura;
                                     habitacionSeleccionada.reservarHabitacion();
 
+                                    fileHandler.addRecord(factura); 
+
                                     System.out.println("Habitación reservada con éxito!");
                                     datosValidos = true;
                                 } else {
@@ -118,16 +118,10 @@ public class hotel {
                         }
                     }
                     case 3 -> {
-                        System.out.println("Facturas generadas:");
-                        for (int i = 0; i < numFacturas; i++) {
-                            System.out.println(facturas[i]);
-                        }
+                        LeerArchivosHotel lector = new LeerArchivosHotel();
+                        lector.readFacturas();
                     }
                     case 4 -> {
-                        fileHandler.openFile();
-                        fileHandler.addRecords(facturas, numFacturas);
-                        fileHandler.closeFile();
-                        System.out.println("Se guardaron todos los datos nuevos...");
                         scanner.close();
                         System.exit(0);
                     }
