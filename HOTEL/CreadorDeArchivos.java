@@ -19,6 +19,7 @@ public class CreadorDeArchivos {
     public void addRecord(Factura factura) {
         try {
             if (writer != null) {
+                writer.write(Constantes.NOM + "\n" + Constantes.DIC + "\n" + Constantes.TEL + "\n" + Constantes.EST + " estrellas" +"\n");
                 writer.write(factura.toString());
                 writer.newLine(); 
             }

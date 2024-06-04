@@ -8,9 +8,9 @@ public class hotel {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Habitacion[] habitacionesDisponibles = {
-            new HabitacionIndividual("Habitacion Individual", 300, 100, "Baja", 1, 1),
+            new HabitacionIndividual("Habitacion Individual", 300, 100, "Baja", 5, 1),
             new HabitacionDoble("Habitacion Doble", 310, 200, "Media", 3, 1),
-            new HabitacionSuite("Habitacion Suite", 320, 300, "Alta", 4, "1")
+            new HabitacionSuite("Habitacion Suite", 320, 300, "Alta", 2, "1")
         };
 
         Factura[] facturas = new Factura[10];
@@ -28,7 +28,9 @@ public class hotel {
                                    \u2584\u2588\u2584 \u2591\u2588\u2584\u2584\u2584\u2588 \u2591\u2588\u2584\u2584\u2584\u2588 \u00a9 2024"""
                 );
                 System.out.println();
-                System.out.println("Hotel los tilinos");
+                System.out.println(Constantes.NOM);
+                System.out.println( "Direccion: "+Constantes.DIC  + "\n" + "Telefono: " + Constantes.TEL);
+                System.out.println("Calificacion del hotel: " + Constantes.EST + " estrellas");
                 System.out.println("Menú:");
                 System.out.println("1) Reservar Habitación");
                 System.out.println("2) Mostrar información de habitaciones");
