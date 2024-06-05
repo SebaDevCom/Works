@@ -6,10 +6,12 @@ import java.io.Serializable;
 
     private Cliente cliente;
     private Habitacion habitacion;
+    private int diahosp;
 
-    public Factura(Cliente cliente, Habitacion habitacion) {
+    public Factura(Cliente cliente, Habitacion habitacion, String diahosp) {
         this.cliente = cliente;
         this.habitacion = habitacion;
+        this.diahosp = diahosp;
     }
 
     public Cliente getCliente() {
