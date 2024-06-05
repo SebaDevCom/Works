@@ -3,7 +3,7 @@ package HOTEL;
 import java.io.Serializable;
 
 class Cliente implements Serializable {
-    
+
     private String nombre;
     private String rfc;
     private String direccion;

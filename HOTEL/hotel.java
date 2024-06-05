@@ -8,9 +8,9 @@ public class hotel {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Habitacion[] habitacionesDisponibles = {
-            new HabitacionIndividual("Habitacion Individual", 300, 100, "Baja", 1, 1),
+            new HabitacionIndividual("Habitacion Individual", 300, 100, "Baja", 5, 1),
             new HabitacionDoble("Habitacion Doble", 310, 200, "Media", 3, 1),
-            new HabitacionSuite("Habitacion Suite", 320, 300, "Alta", 4, "1")
+            new HabitacionSuite("Habitacion Suite", 320, 300, "Alta", 2, "1")
         };
 
         Factura[] facturas = new Factura[10];
@@ -25,12 +25,12 @@ public class hotel {
                                    
                                    \u2580\u2588\u2580 \u2591\u2588\u2580\u2580\u2580\u2588 \u2591\u2588\u2580\u2580\u2580\u2588 
                                    \u2591\u2588\u2500 \u2591\u2588\u2500\u2500\u2591\u2588 \u2500\u2580\u2580\u2580\u2584\u2584 
-                                   \u2584\u2588\u2584 \u2591\u2588\u2584\u2584\u2584\u2588 \u2591\u2588\u2584\u2584\u2584\u2588 \u00a9 2024""" //
-                //
-                //
+                                   \u2584\u2588\u2584 \u2591\u2588\u2584\u2584\u2584\u2588 \u2591\u2588\u2584\u2584\u2584\u2588 \u00a9 2024"""
                 );
-                                        System.out.println();
-                System.out.println("Hotel los tilinos");
+                System.out.println();
+                System.out.println(Constantes.NOM);
+                System.out.println( "Direccion: "+Constantes.DIC  + "\n" + "Telefono: " + Constantes.TEL);
+                System.out.println("Calificacion del hotel: " + Constantes.EST + " estrellas");
                 System.out.println("Menú:");
                 System.out.println("1) Reservar Habitación");
                 System.out.println("2) Mostrar información de habitaciones");
@@ -91,11 +91,32 @@ public class hotel {
                                         }
                                     }
 
+                                    int dias;
+                                    while (true) {
+                                        try {
+                                            System.out.print("Ingrese el número de días de estancia: ");
+                                            dias = scanner.nextInt();
+                                            if (dias <= 0) {
+                                                System.out.println("Error: El número de días debe ser mayor que cero.");
+                                            } else {
+                                                break;
+                                            }
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("Entrada inválida... ¡Intente nuevamente!");
+                                            scanner.nextLine();
+                                        }
+                                    }
+
                                     Cliente cliente = new Cliente(nombreCliente, rfcCliente, direccionCliente);
-                                    Factura factura = new Factura(cliente, habitacionSeleccionada);
+                                    Factura factura = new Factura(cliente, habitacionSeleccionada, dias);
 
                                     facturas[numFacturas++] = factura;
                                     habitacionSeleccionada.reservarHabitacion();
+
+                                    String fileName = "Factura_de_" + cliente.getRfc() + ".txt";
+                                    fileHandler.openFile(fileName);
+                                    fileHandler.addRecord(factura);
+                                    fileHandler.closeFile();
 
                                     System.out.println("Habitación reservada con éxito!");
                                     datosValidos = true;
@@ -118,16 +139,11 @@ public class hotel {
                         }
                     }
                     case 3 -> {
-                        System.out.println("Facturas generadas:");
-                        for (int i = 0; i < numFacturas; i++) {
-                            System.out.println(facturas[i]);
-                        }
+                        LeerArchivosHotel lector = new LeerArchivosHotel();
+                        lector.readFacturas();
                     }
                     case 4 -> {
-                        fileHandler.openFile();
-                        fileHandler.addRecords(facturas, numFacturas);
-                        fileHandler.closeFile();
-                        System.out.println("Se guardaron todos los datos nuevos...");
+                        System.out.println("¡Hasta luego!");
                         scanner.close();
                         System.exit(0);
                     }

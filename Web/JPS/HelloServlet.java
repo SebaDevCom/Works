@@ -1,4 +1,4 @@
-package Web.WebProcJav;
+package Web.JPS;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

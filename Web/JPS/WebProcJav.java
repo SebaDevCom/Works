@@ -1,4 +1,4 @@
-package Web.WebProcJav;
+package Web.JPS;
 
 public class WebProcJav {
     

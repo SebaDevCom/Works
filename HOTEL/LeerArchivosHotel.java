@@ -1,27 +1,31 @@
 package HOTEL;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 
 public class LeerArchivosHotel {
 
     public void readFacturas() {
-        try (ObjectInputStream input = new ObjectInputStream(new FileInputStream("Facturas.ser"))) {
+        File folder = new File(".");
+        File[] listOfFiles = folder.listFiles((dir, name) -> name.startsWith("Factura_") && name.endsWith(".txt"));
+
+        if (listOfFiles != null && listOfFiles.length > 0) {
             System.out.println("Facturas almacenadas:");
-            while (true) {
-                try {
-                    Factura factura = (Factura) input.readObject();
-                    System.out.println(factura);
-                } catch (EOFException eofException) {
-                    break;
-                } catch (ClassNotFoundException e) {
-                    System.err.println("Clase no encontrada al leer el archivo.");
+            for (File file : listOfFiles) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        System.out.println(line);
+                    }
+                    System.out.println(); 
+                } catch (IOException e) {
+                    System.err.println("Error al leer el archivo de facturas: " + file.getName());
                 }
             }
-        } catch (IOException e) {
-            System.err.println("Error al leer el archivo de facturas: " + e.toString());
+        } else {
+            System.out.println("No se encontraron archivos de facturas.");
         }
     }
 }

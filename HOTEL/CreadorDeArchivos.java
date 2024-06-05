@@ -1,39 +1,40 @@
 package HOTEL;
 
-import java.io.FileOutputStream;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 public class CreadorDeArchivos {
 
-    private ObjectOutputStream output;
+    private BufferedWriter writer;
 
-    public void openFile() {
+    public void openFile(String fileName) {
         try {
-            output = new ObjectOutputStream(new FileOutputStream("Facturas.ser"));
+            writer = new BufferedWriter(new FileWriter(fileName));
         } catch (IOException ioException) {
-            System.err.println("Error al abrir el archivo...");
+            System.err.println("Error al abrir el archivo " + fileName);
         }
     }
 
-    public void addRecords(Factura[] facturas, int numFacturas) {
+    public void addRecord(Factura factura) {
         try {
-            for (int i = 0; i < numFacturas; i++) {
-                output.writeObject(facturas[i]);
+            if (writer != null) {
+                writer.write(Constantes.NOM + "\n" + Constantes.DIC + "\n" + Constantes.TEL + "\n" + Constantes.EST + " estrellas" +"\n");
+                writer.write(factura.toString());
+                writer.newLine(); 
             }
         } catch (IOException ioException) {
-            System.err.println("Error al escribir en el archivo...");
+            System.err.println("Error al escribir en el archivo " + factura.getCliente().getRfc());
         }
     }
 
     public void closeFile() {
         try {
-            if (output != null) {
-                output.close();
+            if (writer != null) {
+                writer.close();
             }
         } catch (IOException ioException) {
-            System.err.println("Error al cerrar el archivo...");
-            System.exit(1);
+            System.err.println("Error al cerrar el archivo.");
         }
     }
 }
